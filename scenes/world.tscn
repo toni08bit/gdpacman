@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://djdiq6882dkta"]
+
+[ext_resource type="Script" uid="uid://dtuxlgtwkhuoy" path="res://code/modules/world.gd" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://b7jhnt5twucdi" path="res://code/modules/player.gd" id="2_rwgxs"]
+
+[sub_resource type="Gradient" id="Gradient_4wyf3"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k0juu"]
+gradient = SubResource("Gradient_4wyf3")
+fill_to = Vector2(1, 1)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nnsk1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_k0juu")
+script = ExtResource("2_rwgxs")
