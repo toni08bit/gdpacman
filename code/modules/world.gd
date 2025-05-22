@@ -1,110 +1,55 @@
 extends Node2D
 
-const MAX_X: float = 0.5
-const MAX_Y: float = 0.5
-
-var map_loaded: bool = false
+signal world_ready
 
 var points: PackedVector2Array = []
-var lines: Array[PackedInt32Array] = []
-var portals: Array[PackedInt32Array] = []
-var features: PackedInt32Array = []
-
-var map_bounds: PackedVector2Array
-var map_scale: float
-var tl_diff: Vector2
+var network: Array = [] # [right, down, left, up] per point
 
 func _ready() -> void:
-	load_map(null)
+	var point_map := {}
+	for path: Path2D in get_node("PATHS").get_children():
+		var curve := path.curve
+		for i in curve.point_count:
+			var local_p := curve.get_point_position(i)
+			var p := path.to_global(local_p) # Convert to global position
 
-func load_map(map_resource: Resource) -> void:
-	assert(!map_loaded,"Map already loaded")
-	var map_data_array := _extract_map_resource(map_resource)
-	points = map_data_array[0]
-	lines = map_data_array[1]
-	portals = map_data_array[2]
-	features = map_data_array[3]
-	
-	var viewport_size := get_viewport().get_visible_rect().size
-	map_bounds = _get_map_bounds()
-	map_scale = min(
-		viewport_size.x * MAX_X / (map_bounds[1].x - map_bounds[0].x),
-		viewport_size.y * MAX_Y / (map_bounds[1].y - map_bounds[0].y)
-	)
-	tl_diff = Vector2(
-		map_bounds[1] - map_bounds[0]
-	) * map_scale / 2
-	
-	for line in lines:
-		var new_line2d := Line2D.new()
-		new_line2d.width = 2
-		new_line2d.add_point(unit_to_world(points[line[0]]))
-		new_line2d.add_point(unit_to_world(points[line[1]]))
-		add_child(new_line2d)
-	
-	$PlayerSprite.spawn(features[0])
+			if not point_map.has(p):
+				point_map[p] = points.size()
+				points.append(p)
+				network.append([
+					PackedInt32Array(), PackedInt32Array(),
+					PackedInt32Array(), PackedInt32Array()
+				])
 
-func _extract_map_resource(map_resource: Resource) -> Array[Variant]: # TODO load from file
-	var points: PackedVector2Array = [
-		Vector2(0, 0), Vector2(1, 0), Vector2(2, 0),
-		Vector2(0, 1), Vector2(1, 1), Vector2(2, 1),
-		Vector2(0, 2), Vector2(1, 2), Vector2(2, 2)
-	]
+			if i > 0:
+				var local_prev := curve.get_point_position(i - 1)
+				var p_prev := path.to_global(local_prev)
 
-	var lines: Array[PackedInt32Array] = [
-		[0, 1], [1, 2],  # Top row
-		[3, 4], [4, 5],  # Middle row
-		[6, 7], [7, 8],  # Bottom row
-		[0, 3], [3, 6],  # Left column
-		[1, 4], [4, 7],  # Middle column
-		[2, 5], [5, 8]   # Right column
-	]
+				if not point_map.has(p_prev):
+					point_map[p_prev] = points.size()
+					points.append(p_prev)
+					network.append([
+						PackedInt32Array(), PackedInt32Array(),
+						PackedInt32Array(), PackedInt32Array()
+					])
 
-	var portals: Array[PackedInt32Array] = [
-		#[0, 1]  # Left/Right tunnel teleport
-	]
+				_connect(point_map[p_prev], point_map[p])
+	emit_signal("world_ready")
 
-	var features: PackedInt32Array = [
-		4,  # Player spawn
-		0   # Ghost spawn
-	]
 
-	return [points, lines, portals, features]
-
-func _get_map_bounds() -> PackedVector2Array:
-	var min_x: float = points[0].x
-	var min_y: float = points[0].y
-	var max_x: float = points[0].x
-	var max_y: float = points[0].y
-	
-	for point in points:
-		if point.x < min_x:
-			min_x = point.x
-		if point.y < min_y:
-			min_y = point.y
-		if point.x > max_x:
-			max_x = point.x
-		if point.y > max_y:
-			max_y = point.y
-	
-	return PackedVector2Array([
-		Vector2(min_x,min_y),
-		Vector2(max_x,max_y)
-	])
-
-func _get_lines_at_point(point_id: int) -> Array[PackedInt32Array]:
-	var result: Array[PackedInt32Array] = [PackedInt32Array(),PackedInt32Array()]
-	var line_i: int = 0
-	for line in lines:
-		if line[0] == point_id:
-			result[0].append(line_i)
-		if line[1] == point_id:
-			result[1].append(line_i)
-		line_i += 1
-	return result
-
-func unit_to_world(unit_pos: Vector2) -> Vector2:
-	return (unit_pos - map_bounds[0]) * map_scale - tl_diff
-
-func world_to_unit(world_pos: Vector2) -> Vector2:
-	return Vector2() # TODO
+func _connect(i1: int, i2: int) -> void:
+	var p1 := points[i1]
+	var p2 := points[i2]
+	var d := p2 - p1
+	var a = network[i1]
+	var b = network[i2]
+	if abs(d.x) > abs(d.y):
+		if d.x > 0:
+			a[0].append(i2); b[2].append(i1) # right, left
+		else:
+			a[2].append(i2); b[0].append(i1) # left, right
+	else:
+		if d.y > 0:
+			a[1].append(i2); b[3].append(i1) # down, up
+		else:
+			a[3].append(i2); b[1].append(i1) # up, down

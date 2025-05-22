@@ -1,4 +1,7 @@
-[gd_scene load_steps=46 format=3 uid="uid://c3mm6rt2niqgv"]
+[gd_scene load_steps=48 format=3 uid="uid://c3mm6rt2niqgv"]
+
+[ext_resource type="Script" uid="uid://dtuxlgtwkhuoy" path="res://code/modules/world.gd" id="1_f2kx4"]
+[ext_resource type="Texture2D" uid="uid://jska233u473h" path="res://assets/map/classic-background.jpg" id="2_a8irh"]
 
 [sub_resource type="Curve2D" id="Curve2D_be0no"]
 _data = {
@@ -271,183 +274,191 @@ _data = {
 point_count = 4
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_f2kx4")
 
-[node name="Path2D10" type="Path2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(116, 112)
+scale = Vector2(0.533333, 0.533333)
+texture = ExtResource("2_a8irh")
+
+[node name="PATHS" type="Node2D" parent="."]
+
+[node name="Path2D10" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_be0no")
 
-[node name="Path2D11" type="Path2D" parent="."]
+[node name="Path2D11" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_blm8a")
 
-[node name="Path2D12" type="Path2D" parent="."]
+[node name="Path2D12" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_mlgqr")
 
-[node name="Path2D13" type="Path2D" parent="."]
+[node name="Path2D13" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_wslke")
 
-[node name="Path2D14" type="Path2D" parent="."]
+[node name="Path2D14" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_gw3fx")
 
-[node name="Path2D15" type="Path2D" parent="."]
+[node name="Path2D15" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_n1psn")
 
-[node name="Path2D16" type="Path2D" parent="."]
+[node name="Path2D16" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_c00ee")
 
-[node name="Path2D17" type="Path2D" parent="."]
+[node name="Path2D17" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_p7tei")
 
-[node name="Path2D18" type="Path2D" parent="."]
+[node name="Path2D18" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_c70he")
 
-[node name="Path2D19" type="Path2D" parent="."]
+[node name="Path2D19" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_mo32q")
 
-[node name="Path2D20" type="Path2D" parent="."]
+[node name="Path2D20" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_6k6j1")
 
-[node name="Path2D21" type="Path2D" parent="."]
+[node name="Path2D21" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_m335s")
 
-[node name="Path2D22" type="Path2D" parent="."]
+[node name="Path2D22" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_sq6bu")
 
-[node name="Path2D23" type="Path2D" parent="."]
+[node name="Path2D23" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_4b7dj")
 
-[node name="Path2D24" type="Path2D" parent="."]
+[node name="Path2D24" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_5u2yt")
 
-[node name="Path2D25" type="Path2D" parent="."]
+[node name="Path2D25" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_30iet")
 
-[node name="Path2D26" type="Path2D" parent="."]
+[node name="Path2D26" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_mkblt")
 
-[node name="Path2D27" type="Path2D" parent="."]
+[node name="Path2D27" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_4o3w1")
 
-[node name="Path2D28" type="Path2D" parent="."]
+[node name="Path2D28" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_6ek7f")
 
-[node name="Path2D29" type="Path2D" parent="."]
+[node name="Path2D29" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_4qxv8")
 
-[node name="Path2D30" type="Path2D" parent="."]
+[node name="Path2D30" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_fq663")
 
-[node name="Path2D31" type="Path2D" parent="."]
+[node name="Path2D31" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_mniao")
 
-[node name="Path2D32" type="Path2D" parent="."]
+[node name="Path2D32" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_yfm5w")
 
-[node name="Path2D33" type="Path2D" parent="."]
+[node name="Path2D33" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_081xv")
 
-[node name="Path2D34" type="Path2D" parent="."]
+[node name="Path2D34" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_12q1p")
 
-[node name="Path2D35" type="Path2D" parent="."]
+[node name="Path2D35" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_lhdcv")
 
-[node name="Path2D36" type="Path2D" parent="."]
+[node name="Path2D36" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_cgoaf")
 
-[node name="Path2D37" type="Path2D" parent="."]
+[node name="Path2D37" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_mwr4f")
 
-[node name="Path2D38" type="Path2D" parent="."]
+[node name="Path2D38" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_2cfcp")
 
-[node name="Path2D39" type="Path2D" parent="."]
+[node name="Path2D39" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_y2ir2")
 
-[node name="Path2D40" type="Path2D" parent="."]
+[node name="Path2D40" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_1qn5a")
 
-[node name="Path2D41" type="Path2D" parent="."]
+[node name="Path2D41" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_leq5k")
 
-[node name="Path2D42" type="Path2D" parent="."]
+[node name="Path2D42" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_qcc5i")
 
-[node name="Path2D43" type="Path2D" parent="."]
+[node name="Path2D43" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_litwm")
 
-[node name="Path2D44" type="Path2D" parent="."]
+[node name="Path2D44" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_g8nl4")
 
-[node name="Path2D45" type="Path2D" parent="."]
+[node name="Path2D45" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_vqsqp")
 
-[node name="Path2D9" type="Path2D" parent="."]
+[node name="Path2D9" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_2lpho")
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Path2D" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_hrmi8")
 
-[node name="Path2D2" type="Path2D" parent="."]
+[node name="Path2D2" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_4xfga")
 
-[node name="Path2D3" type="Path2D" parent="."]
+[node name="Path2D3" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_paxxb")
 
-[node name="Path2D4" type="Path2D" parent="."]
+[node name="Path2D4" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_gldc4")
 
-[node name="Path2D5" type="Path2D" parent="."]
+[node name="Path2D5" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_0cso3")
 
-[node name="Path2D6" type="Path2D" parent="."]
+[node name="Path2D6" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_2klcf")
 
-[node name="Path2D7" type="Path2D" parent="."]
+[node name="Path2D7" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_nakos")
 
-[node name="Path2D8" type="Path2D" parent="."]
+[node name="Path2D8" type="Path2D" parent="PATHS"]
 position = Vector2(336, 192)
 curve = SubResource("Curve2D_jh32y")

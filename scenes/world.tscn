@@ -1,20 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://djdiq6882dkta"]
+[gd_scene load_steps=9 format=3 uid="uid://djdiq6882dkta"]
 
-[ext_resource type="Script" uid="uid://dtuxlgtwkhuoy" path="res://code/modules/world.gd" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://b7jhnt5twucdi" path="res://code/modules/player.gd" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://c3mm6rt2niqgv" path="res://assets/map/classic.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://b7jhnt5twucdi" path="res://code/modules/player.gd" id="1_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://b15u80ucvbu6d" path="res://assets/spritesheet.png" id="2_4wyf3"]
 
-[sub_resource type="Gradient" id="Gradient_4wyf3"]
-colors = PackedColorArray(1, 0, 0, 1, 1, 0, 1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0juu"]
+atlas = ExtResource("2_4wyf3")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k0juu"]
-gradient = SubResource("Gradient_4wyf3")
-fill_to = Vector2(1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_71j4m"]
+atlas = ExtResource("2_4wyf3")
+region = Rect2(18, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfnet"]
+atlas = ExtResource("2_4wyf3")
+region = Rect2(36, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7141"]
+atlas = ExtResource("2_4wyf3")
+region = Rect2(18, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4mrxx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0juu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71j4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfnet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7141")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_nnsk1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(115, 104)
+zoom = Vector2(1.71, 1.71)
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_k0juu")
-script = ExtResource("2_rwgxs")
+[node name="Node2D" parent="." instance=ExtResource("1_nnsk1")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.825, 0.825)
+sprite_frames = SubResource("SpriteFrames_4mrxx")
+autoplay = "default"
+script = ExtResource("1_rwgxs")
